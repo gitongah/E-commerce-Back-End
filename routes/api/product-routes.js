@@ -7,7 +7,18 @@ const { Product, Category, Tag, ProductTag } = require('../../models');
 router.get('/', async(req, res) => {
   // find all products
   try{
-    const productData = await Product.findAll();
+    const productData = await Product.findAll({
+      attributes: ["id", "product_name", "price", "stock", "category_id"],
+      include:[{
+        model:Tag,
+        attributes:["id","tag_name"],
+        through: ProductTag,
+      },
+    {
+      model:Category,
+      attributes:["id", "category_name"],
+    },],
+    });
     res.status(200).json(productData);
   }catch(error){
     res.status(500).json(error)
@@ -20,7 +31,16 @@ router.get('/:id', async(req, res) => {
   // find a single product by its `id`
   try{
     const productData = await Product.findByPk(req.params.id,{
-      include:[{model: Category, Tag}]
+      include:[
+        {
+          model: Category,
+          attributes:["id", "category_name"]
+        },
+      {
+        model:Tag,
+        attributes:["id", "tag_name"],
+        through: ProductTag,
+      }]
     });
     if(!productData){
       res.status(404).json({ message: 'no such product with this id!'});
@@ -113,14 +133,14 @@ router.put('/:id', (req, res) => {
 router.delete('/:id', async(req, res) => {
   // delete one product by its `id` value
   try {
-    const productData = await Category.destroy({
+    const productData = await Product.destroy({
       where: {
         id: req.params.id
       }
     });
 
     if (!productData) {
-      res.status(404).json({ message: 'No category found with this id!' });
+      res.status(404).json({ message: 'No product found with this id!' });
       return;
     }
 
