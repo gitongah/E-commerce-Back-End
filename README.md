@@ -2,7 +2,7 @@
   # E-commerce Store
   [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
   ## Description 🔎
-  This is the backend of an E-commerce store, where the user can be able to create new products, tags and categories and also edit them.
+  This project serves as the backend infrastructure for an e-commerce platform, empowering administrators to efficiently manage product inventory. It allows users to create new products, tags, and categories, as well as edit existing ones. The system ensures seamless operation by providing comprehensive functionalities for catalog management, including product details, categorization, and tagging.
   ## Link to the live Demo of the project.
   https://drive.google.com/file/d/1qFhSRbMbpMhmHWZcm02gOTyCt3XOkj_R/view
   ### Table of Contents 📖
